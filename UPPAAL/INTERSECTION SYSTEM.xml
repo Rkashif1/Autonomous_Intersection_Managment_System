@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>chan request, response;
+</declaration>
+	<template>
+		<name x="5" y="5">Coordinator</name>
+		<declaration>clock wait;
+</declaration>
+		<location id="id0" x="-102" y="17">
+			<name x="-112" y="-17">Idle</name>
+		</location>
+		<location id="id1" x="195" y="17">
+			<name x="185" y="-17">Handle_Request</name>
+		</location>
+		<init ref="id0"/>
+		<transition id="id2">
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="8" y="85">response!</label>
+			<nail x="42" y="144"/>
+		</transition>
+		<transition id="id3">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="17" y="-8">request!</label>
+		</transition>
+	</template>
+	<template>
+		<name>Car</name>
+		<declaration>clock wait;
+</declaration>
+		<location id="id4" x="-153" y="-34">
+			<name x="-163" y="-68">Wait</name>
+		</location>
+		<location id="id5" x="153" y="-34">
+			<name x="143" y="-68">Crossing</name>
+		</location>
+		<init ref="id4"/>
+		<transition id="id6">
+			<source ref="id5"/>
+			<target ref="id4"/>
+			<label kind="synchronisation" x="-25" y="51">response?</label>
+			<nail x="17" y="119"/>
+		</transition>
+		<transition id="id7">
+			<source ref="id4"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="-34" y="-59">request?</label>
+			<nail x="136" y="-34"/>
+		</transition>
+	</template>
+	<system>
+
+Car1 = Car ();
+Car2 = Car ();
+Car3 = Car ();
+Car4 = Car ();
+
+system Coordinator, Car1, Car2, Car3, Car4;
+</system>
+	<queries>
+		<query>
+			<formula/>
+			<comment/>
+		</query>
+	</queries>
+</nta>

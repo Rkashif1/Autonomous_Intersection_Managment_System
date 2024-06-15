@@ -1,68 +1,747 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
 <nta>
-	<declaration>chan request, response;
-</declaration>
+	<declaration>chan request,wait,  approved, movingout, ArrivingfromEast, ArrivingfromWest, ArrivingfromSouth, ArrivingfromNorth;
+int Qeue1 , Qeue2, Qeue3, Qeue4;</declaration>
 	<template>
-		<name x="5" y="5">Coordinator</name>
-		<declaration>clock wait;
+		<name x="5" y="5">Intersection_coordinator</name>
+		<declaration>
 </declaration>
-		<location id="id0" x="-102" y="17">
-			<name x="-112" y="-17">Idle</name>
+		<location id="id0" x="-399" y="-68">
+			<name x="-409" y="-102">idle</name>
 		</location>
-		<location id="id1" x="195" y="17">
-			<name x="185" y="-17">Handle_Request</name>
+		<location id="id1" x="-17" y="-340">
+			<name x="-76" y="-365">North</name>
+		</location>
+		<location id="id2" x="17" y="-127">
+			<name x="-34" y="-153">West</name>
+		</location>
+		<location id="id3" x="68" y="42">
+			<name x="17" y="0">South</name>
+		</location>
+		<location id="id4" x="144" y="280">
+			<name x="93" y="229">East</name>
+		</location>
+		<location id="id5" x="374" y="-297">
+			<name x="374" y="-323">TowardsEast</name>
+		</location>
+		<location id="id6" x="425" y="-102">
+			<name x="415" y="-136">TowardsWest</name>
+		</location>
+		<location id="id7" x="450" y="102">
+			<name x="433" y="51">TowardsSouth</name>
+		</location>
+		<location id="id8" x="459" y="314">
+			<name x="433" y="255">TowardsNorth</name>
+		</location>
+		<location id="id9" x="960" y="-136">
+			<name x="952" y="-170">Queue</name>
+		</location>
+		<location id="id10" x="943" y="204">
+			<name x="933" y="170">Crossing</name>
 		</location>
 		<init ref="id0"/>
-		<transition id="id2">
-			<source ref="id1"/>
-			<target ref="id0"/>
-			<label kind="synchronisation" x="8" y="85">response!</label>
-			<nail x="42" y="144"/>
+		<transition id="id11">
+			<source ref="id9"/>
+			<target ref="id4"/>
+			<nail x="977" y="-170"/>
+			<nail x="977" y="-527"/>
+			<nail x="127" y="-518"/>
 		</transition>
-		<transition id="id3">
+		<transition id="id12">
+			<source ref="id9"/>
+			<target ref="id3"/>
+			<nail x="995" y="-153"/>
+			<nail x="995" y="-536"/>
+			<nail x="51" y="-527"/>
+		</transition>
+		<transition id="id13">
+			<source ref="id9"/>
+			<target ref="id2"/>
+			<nail x="960" y="-510"/>
+			<nail x="8" y="-510"/>
+		</transition>
+		<transition id="id14">
+			<source ref="id9"/>
+			<target ref="id1"/>
+			<nail x="952" y="-153"/>
+			<nail x="943" y="-493"/>
+			<nail x="-17" y="-493"/>
+		</transition>
+		<transition id="id15">
+			<source ref="id4"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="323" y="144">request?</label>
+		</transition>
+		<transition id="id16">
+			<source ref="id3"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="280" y="-238">request?</label>
+		</transition>
+		<transition id="id17">
+			<source ref="id3"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="212" y="-42">request?</label>
+		</transition>
+		<transition id="id18">
+			<source ref="id8"/>
+			<target ref="id10"/>
+			<label kind="guard" x="663" y="246">Qeue4 == 0</label>
+			<label kind="synchronisation" x="663" y="263">approved!</label>
+		</transition>
+		<transition id="id19">
+			<source ref="id10"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="340" y="339">movingout?</label>
+			<nail x="960" y="322"/>
+			<nail x="-391" y="331"/>
+		</transition>
+		<transition id="id20">
+			<source ref="id8"/>
+			<target ref="id9"/>
+			<label kind="guard" x="748" y="0">Qeue4 == 1</label>
+			<label kind="synchronisation" x="782" y="17">wait!</label>
+		</transition>
+		<transition id="id21">
+			<source ref="id7"/>
+			<target ref="id10"/>
+			<label kind="guard" x="663" y="136">Qeue3 == 0</label>
+			<label kind="synchronisation" x="697" y="153">approved!</label>
+		</transition>
+		<transition id="id22">
+			<source ref="id7"/>
+			<target ref="id9"/>
+			<label kind="guard" x="697" y="-76">Qeue3 == 1</label>
+			<label kind="synchronisation" x="731" y="-51">wait!</label>
+		</transition>
+		<transition id="id23">
+			<source ref="id6"/>
+			<target ref="id10"/>
+			<label kind="guard" x="510" y="-25">Qeue2 == 0</label>
+			<label kind="synchronisation" x="552" y="-8">approved!</label>
+		</transition>
+		<transition id="id24">
+			<source ref="id5"/>
+			<target ref="id10"/>
+			<label kind="guard" x="416" y="-229">Qeue1 == 0</label>
+			<label kind="synchronisation" x="450" y="-212">approved!</label>
+		</transition>
+		<transition id="id25">
+			<source ref="id6"/>
+			<target ref="id9"/>
+			<label kind="guard" x="646" y="-144">Qeue2 == 1</label>
+			<label kind="synchronisation" x="680" y="-127">wait!</label>
+		</transition>
+		<transition id="id26">
+			<source ref="id5"/>
+			<target ref="id9"/>
+			<label kind="guard" x="510" y="-272">Qeue1 == 1</label>
+			<label kind="synchronisation" x="544" y="-255">wait!</label>
+		</transition>
+		<transition id="id27">
+			<source ref="id4"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="229" y="289">request?</label>
+		</transition>
+		<transition id="id28">
+			<source ref="id4"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="187" y="187">request?</label>
+		</transition>
+		<transition id="id29">
+			<source ref="id3"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="289" y="212">request?</label>
+		</transition>
+		<transition id="id30">
+			<source ref="id2"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="153" y="25">request?</label>
+			<nail x="25" y="-119"/>
+		</transition>
+		<transition id="id31">
+			<source ref="id2"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="119" y="-59">request?</label>
+		</transition>
+		<transition id="id32">
+			<source ref="id2"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="119" y="-204">request?</label>
+		</transition>
+		<transition id="id33">
+			<source ref="id1"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="153" y="-127">request?</label>
+		</transition>
+		<transition id="id34">
+			<source ref="id1"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="119" y="-255">request?</label>
+		</transition>
+		<transition id="id35">
+			<source ref="id1"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="127" y="-331">request?</label>
+		</transition>
+		<transition id="id36">
+			<source ref="id0"/>
+			<target ref="id4"/>
+			<label kind="synchronisation" x="-178" y="102">ArrivingfromEast?</label>
+		</transition>
+		<transition id="id37">
+			<source ref="id0"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="-170" y="-17">ArrivingfromSouth?</label>
+		</transition>
+		<transition id="id38">
+			<source ref="id0"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="-187" y="-110">ArrivingfromWest?</label>
+		</transition>
+		<transition id="id39">
 			<source ref="id0"/>
 			<target ref="id1"/>
-			<label kind="synchronisation" x="17" y="-8">request!</label>
+			<label kind="synchronisation" x="-246" y="-229">ArrivingfromNorth?</label>
 		</transition>
 	</template>
 	<template>
-		<name>Car</name>
-		<declaration>clock wait;
-</declaration>
-		<location id="id4" x="-153" y="-34">
-			<name x="-163" y="-68">Wait</name>
+		<name>Car1</name>
+		<location id="id40" x="102" y="221">
+			<name x="93" y="178">TurnRight</name>
 		</location>
-		<location id="id5" x="153" y="-34">
-			<name x="143" y="-68">Crossing</name>
+		<location id="id41" x="349" y="323">
+			<name x="306" y="280">drive3</name>
 		</location>
-		<init ref="id4"/>
-		<transition id="id6">
-			<source ref="id5"/>
-			<target ref="id4"/>
-			<label kind="synchronisation" x="-25" y="51">response?</label>
-			<nail x="17" y="119"/>
+		<location id="id42" x="688" y="-76">
+			<name x="678" y="-110">Crossing</name>
+		</location>
+		<location id="id43" x="-415" y="-76">
+			<name x="-425" y="-110">idle</name>
+		</location>
+		<location id="id44" x="399" y="-178">
+			<name x="391" y="-212">drive2</name>
+		</location>
+		<location id="id45" x="280" y="-459">
+			<name x="270" y="-493">drive1</name>
+		</location>
+		<location id="id46" x="340" y="153">
+			<name x="330" y="119">stop3</name>
+		</location>
+		<location id="id47" x="-127" y="-76">
+			<name x="-204" y="-119">Intersection</name>
+		</location>
+		<location id="id48" x="408" y="42">
+			<name x="398" y="8">stop2</name>
+		</location>
+		<location id="id49" x="357" y="-297">
+			<name x="348" y="-331">stop1</name>
+		</location>
+		<location id="id50" x="204" y="-76">
+			<name x="136" y="-110">Gostraight</name>
+		</location>
+		<location id="id51" x="136" y="-289">
+			<name x="68" y="-323">Turnleft</name>
+		</location>
+		<init ref="id43"/>
+		<transition id="id52">
+			<source ref="id40"/>
+			<target ref="id41"/>
+			<label kind="synchronisation" x="170" y="255">approved?</label>
 		</transition>
-		<transition id="id7">
-			<source ref="id4"/>
-			<target ref="id5"/>
-			<label kind="synchronisation" x="-34" y="-59">request?</label>
-			<nail x="136" y="-34"/>
+		<transition id="id53">
+			<source ref="id42"/>
+			<target ref="id43"/>
+			<nail x="297" y="-569"/>
+		</transition>
+		<transition id="id54">
+			<source ref="id41"/>
+			<target ref="id42"/>
+			<label kind="synchronisation" x="484" y="102">movingout!</label>
+			<label kind="assignment" x="450" y="144">Qeue1 = 0</label>
+		</transition>
+		<transition id="id55">
+			<source ref="id44"/>
+			<target ref="id42"/>
+			<label kind="synchronisation" x="442" y="-153">movingout!</label>
+			<label kind="assignment" x="467" y="-127">Qeue1 = 0,
+Qeue3 = 0</label>
+			<nail x="408" y="-178"/>
+		</transition>
+		<transition id="id56">
+			<source ref="id45"/>
+			<target ref="id42"/>
+			<label kind="synchronisation" x="442" y="-272">movingout!</label>
+			<label kind="assignment" x="391" y="-297">Qeue2 = 0</label>
+		</transition>
+		<transition id="id57">
+			<source ref="id46"/>
+			<target ref="id47"/>
+		</transition>
+		<transition id="id58">
+			<source ref="id48"/>
+			<target ref="id47"/>
+		</transition>
+		<transition id="id59">
+			<source ref="id49"/>
+			<target ref="id47"/>
+		</transition>
+		<transition id="id60">
+			<source ref="id40"/>
+			<target ref="id46"/>
+			<label kind="synchronisation" x="212" y="170">wait?</label>
+		</transition>
+		<transition id="id61">
+			<source ref="id50"/>
+			<target ref="id48"/>
+			<label kind="synchronisation" x="263" y="-51">wait?</label>
+		</transition>
+		<transition id="id62">
+			<source ref="id50"/>
+			<target ref="id44"/>
+			<label kind="synchronisation" x="263" y="-136">approved?</label>
+		</transition>
+		<transition id="id63">
+			<source ref="id51"/>
+			<target ref="id49"/>
+			<label kind="synchronisation" x="204" y="-306">wait?</label>
+		</transition>
+		<transition id="id64">
+			<source ref="id51"/>
+			<target ref="id45"/>
+			<label kind="synchronisation" x="161" y="-391">approved?</label>
+		</transition>
+		<transition id="id65">
+			<source ref="id47"/>
+			<target ref="id40"/>
+			<label kind="synchronisation" x="-68" y="51">request!</label>
+			<label kind="assignment" x="-110" y="68">Qeue1 = 1</label>
+		</transition>
+		<transition id="id66">
+			<source ref="id47"/>
+			<target ref="id50"/>
+			<label kind="synchronisation" x="17" y="-85">request!</label>
+			<label kind="assignment" x="8" y="-68">Qeue1 = 1,
+Qeue3 = 1</label>
+		</transition>
+		<transition id="id67">
+			<source ref="id47"/>
+			<target ref="id51"/>
+			<label kind="synchronisation" x="-25" y="-204">request!</label>
+			<label kind="assignment" x="-51" y="-178">Qeue2 = 1</label>
+		</transition>
+		<transition id="id68">
+			<source ref="id43"/>
+			<target ref="id47"/>
+			<label kind="synchronisation" x="-340" y="-93">ArrivingfromNorth!</label>
+		</transition>
+	</template>
+	<template>
+		<name>Car2</name>
+		<location id="id69" x="541" y="795">
+			<name x="532" y="752">TurnRight</name>
+		</location>
+		<location id="id70" x="788" y="897">
+			<name x="748" y="858">drive3</name>
+		</location>
+		<location id="id71" x="1127" y="498">
+			<name x="1117" y="464">Crossing</name>
+		</location>
+		<location id="id72" x="24" y="498">
+			<name x="14" y="464">idle</name>
+		</location>
+		<location id="id73" x="838" y="396">
+			<name x="830" y="362">drive2</name>
+		</location>
+		<location id="id74" x="719" y="115">
+			<name x="709" y="81">drive_1</name>
+		</location>
+		<location id="id75" x="779" y="727">
+			<name x="769" y="693">stop3</name>
+		</location>
+		<location id="id76" x="312" y="498">
+			<name x="235" y="455">Intersection</name>
+		</location>
+		<location id="id77" x="850" y="612">
+			<name x="840" y="578">stop2</name>
+		</location>
+		<location id="id78" x="796" y="277">
+			<name x="786" y="243">stop1</name>
+		</location>
+		<location id="id79" x="643" y="498">
+			<name x="575" y="464">Gostraight</name>
+		</location>
+		<location id="id80" x="575" y="285">
+			<name x="507" y="251">Turnleft</name>
+		</location>
+		<init ref="id72"/>
+		<transition id="id81">
+			<source ref="id69"/>
+			<target ref="id70"/>
+			<label kind="synchronisation" x="609" y="829">approved?</label>
+		</transition>
+		<transition id="id82">
+			<source ref="id71"/>
+			<target ref="id72"/>
+			<nail x="736" y="5"/>
+		</transition>
+		<transition id="id83">
+			<source ref="id70"/>
+			<target ref="id71"/>
+			<label kind="synchronisation" x="923" y="676">movingout!</label>
+			<label kind="assignment" x="892" y="714">Qeue4 = 0</label>
+		</transition>
+		<transition id="id84">
+			<source ref="id73"/>
+			<target ref="id71"/>
+			<label kind="synchronisation" x="901" y="416">movingout!</label>
+			<label kind="assignment" x="906" y="447">Qeue2 = 0,
+Qeue4 = 0</label>
+			<nail x="847" y="396"/>
+		</transition>
+		<transition id="id85">
+			<source ref="id74"/>
+			<target ref="id71"/>
+			<label kind="synchronisation" x="881" y="302">movingout!</label>
+			<label kind="assignment" x="830" y="277">Qeue3 = 0</label>
+		</transition>
+		<transition id="id86">
+			<source ref="id75"/>
+			<target ref="id76"/>
+		</transition>
+		<transition id="id87">
+			<source ref="id77"/>
+			<target ref="id76"/>
+		</transition>
+		<transition id="id88">
+			<source ref="id78"/>
+			<target ref="id76"/>
+		</transition>
+		<transition id="id89">
+			<source ref="id69"/>
+			<target ref="id75"/>
+			<label kind="synchronisation" x="651" y="744">wait?</label>
+		</transition>
+		<transition id="id90">
+			<source ref="id79"/>
+			<target ref="id77"/>
+			<label kind="synchronisation" x="702" y="523">wait?</label>
+		</transition>
+		<transition id="id91">
+			<source ref="id79"/>
+			<target ref="id73"/>
+			<label kind="synchronisation" x="702" y="438">approved?</label>
+		</transition>
+		<transition id="id92">
+			<source ref="id80"/>
+			<target ref="id78"/>
+			<label kind="synchronisation" x="643" y="268">wait?</label>
+		</transition>
+		<transition id="id93">
+			<source ref="id80"/>
+			<target ref="id74"/>
+			<label kind="synchronisation" x="600" y="183">approved?</label>
+		</transition>
+		<transition id="id94">
+			<source ref="id76"/>
+			<target ref="id69"/>
+			<label kind="synchronisation" x="371" y="625">request!</label>
+			<label kind="assignment" x="330" y="646">Qeue4 = 1</label>
+		</transition>
+		<transition id="id95">
+			<source ref="id76"/>
+			<target ref="id79"/>
+			<label kind="synchronisation" x="456" y="489">request!</label>
+			<label kind="assignment" x="447" y="506">Qeue2 = 1,
+Qeue4 = 1</label>
+		</transition>
+		<transition id="id96">
+			<source ref="id76"/>
+			<target ref="id80"/>
+			<label kind="synchronisation" x="414" y="370">request!</label>
+			<label kind="assignment" x="388" y="396">Qeue3 = 1</label>
+		</transition>
+		<transition id="id97">
+			<source ref="id72"/>
+			<target ref="id76"/>
+			<label kind="synchronisation" x="99" y="481">ArrivingfromSouth!</label>
+		</transition>
+	</template>
+	<template>
+		<name>Car3</name>
+		<location id="id98" x="102" y="221">
+			<name x="93" y="178">TurnRight</name>
+		</location>
+		<location id="id99" x="349" y="323">
+			<name x="306" y="280">drive3</name>
+		</location>
+		<location id="id100" x="688" y="-76">
+			<name x="678" y="-110">Crossing</name>
+		</location>
+		<location id="id101" x="-415" y="-76">
+			<name x="-425" y="-110">idle</name>
+		</location>
+		<location id="id102" x="399" y="-178">
+			<name x="391" y="-212">drive2</name>
+		</location>
+		<location id="id103" x="280" y="-459">
+			<name x="270" y="-493">drive1</name>
+		</location>
+		<location id="id104" x="340" y="153">
+			<name x="330" y="119">stop3</name>
+		</location>
+		<location id="id105" x="-127" y="-76">
+			<name x="-204" y="-119">Intersection</name>
+		</location>
+		<location id="id106" x="408" y="34">
+			<name x="398" y="0">stop2</name>
+		</location>
+		<location id="id107" x="357" y="-297">
+			<name x="347" y="-331">stop1</name>
+		</location>
+		<location id="id108" x="204" y="-76">
+			<name x="136" y="-110">Gostraight</name>
+		</location>
+		<location id="id109" x="136" y="-289">
+			<name x="68" y="-323">Turnleft</name>
+		</location>
+		<init ref="id101"/>
+		<transition id="id110">
+			<source ref="id98"/>
+			<target ref="id99"/>
+			<label kind="synchronisation" x="170" y="255">approved?</label>
+		</transition>
+		<transition id="id111">
+			<source ref="id100"/>
+			<target ref="id101"/>
+			<nail x="297" y="-569"/>
+		</transition>
+		<transition id="id112">
+			<source ref="id99"/>
+			<target ref="id100"/>
+			<label kind="synchronisation" x="484" y="102">movingout!</label>
+			<label kind="assignment" x="450" y="144">Qeue3 = 1</label>
+		</transition>
+		<transition id="id113">
+			<source ref="id102"/>
+			<target ref="id100"/>
+			<label kind="synchronisation" x="450" y="-153">movingout!</label>
+			<label kind="assignment" x="467" y="-127">Qeue4 = 0,
+Qeue3 = 1</label>
+			<nail x="408" y="-178"/>
+		</transition>
+		<transition id="id114">
+			<source ref="id103"/>
+			<target ref="id100"/>
+			<label kind="synchronisation" x="442" y="-272">movingout!</label>
+			<label kind="assignment" x="391" y="-297">Qeue1 = 0</label>
+		</transition>
+		<transition id="id115">
+			<source ref="id104"/>
+			<target ref="id105"/>
+		</transition>
+		<transition id="id116">
+			<source ref="id106"/>
+			<target ref="id105"/>
+		</transition>
+		<transition id="id117">
+			<source ref="id107"/>
+			<target ref="id105"/>
+		</transition>
+		<transition id="id118">
+			<source ref="id98"/>
+			<target ref="id104"/>
+			<label kind="synchronisation" x="212" y="170">wait?</label>
+		</transition>
+		<transition id="id119">
+			<source ref="id108"/>
+			<target ref="id106"/>
+			<label kind="synchronisation" x="263" y="-51">wait?</label>
+		</transition>
+		<transition id="id120">
+			<source ref="id108"/>
+			<target ref="id102"/>
+			<label kind="synchronisation" x="263" y="-136">approved?</label>
+		</transition>
+		<transition id="id121">
+			<source ref="id109"/>
+			<target ref="id107"/>
+			<label kind="synchronisation" x="204" y="-306">wait?</label>
+		</transition>
+		<transition id="id122">
+			<source ref="id109"/>
+			<target ref="id103"/>
+			<label kind="synchronisation" x="161" y="-391">approved?</label>
+		</transition>
+		<transition id="id123">
+			<source ref="id105"/>
+			<target ref="id98"/>
+			<label kind="synchronisation" x="-68" y="51">request!</label>
+			<label kind="assignment" x="-109" y="72">Qeue3 = 1</label>
+		</transition>
+		<transition id="id124">
+			<source ref="id105"/>
+			<target ref="id108"/>
+			<label kind="synchronisation" x="17" y="-85">request!</label>
+			<label kind="assignment" x="8" y="-68">Qeue4 = 1,
+Qeue3 = 1</label>
+		</transition>
+		<transition id="id125">
+			<source ref="id105"/>
+			<target ref="id109"/>
+			<label kind="synchronisation" x="-25" y="-204">request!</label>
+			<label kind="assignment" x="-51" y="-178">Qeue1 = 1</label>
+		</transition>
+		<transition id="id126">
+			<source ref="id101"/>
+			<target ref="id105"/>
+			<label kind="synchronisation" x="-340" y="-93">ArrivingfromWest!</label>
+		</transition>
+	</template>
+	<template>
+		<name>Car4</name>
+		<declaration>
+</declaration>
+		<location id="id127" x="-415" y="-76">
+			<name x="-425" y="-110">idle</name>
+		</location>
+		<location id="id128" x="-127" y="-76">
+			<name x="-204" y="-119">Intersection</name>
+		</location>
+		<location id="id129" x="136" y="-289">
+			<name x="68" y="-323">Turnleft</name>
+		</location>
+		<location id="id130" x="204" y="-76">
+			<name x="136" y="-110">Gostraight</name>
+		</location>
+		<location id="id131" x="102" y="221">
+			<name x="93" y="178">TurnRight</name>
+		</location>
+		<location id="id132" x="340" y="153">
+			<name x="330" y="119">stop3</name>
+		</location>
+		<location id="id133" x="349" y="323">
+			<name x="306" y="280">drive3</name>
+		</location>
+		<location id="id134" x="399" y="-178">
+			<name x="391" y="-212">drive2</name>
+		</location>
+		<location id="id135" x="408" y="42">
+			<name x="398" y="8">stop2</name>
+		</location>
+		<location id="id136" x="280" y="-459">
+			<name x="270" y="-493">drive_1</name>
+		</location>
+		<location id="id137" x="357" y="-297">
+			<name x="347" y="-331">stop1</name>
+		</location>
+		<location id="id138" x="688" y="-76">
+			<name x="678" y="-110">Crossing</name>
+		</location>
+		<init ref="id127"/>
+		<transition id="id139">
+			<source ref="id131"/>
+			<target ref="id133"/>
+			<label kind="synchronisation" x="170" y="255">approved?</label>
+		</transition>
+		<transition id="id140">
+			<source ref="id138"/>
+			<target ref="id127"/>
+			<nail x="297" y="-569"/>
+		</transition>
+		<transition id="id141">
+			<source ref="id133"/>
+			<target ref="id138"/>
+			<label kind="synchronisation" x="484" y="102">movingout!</label>
+			<label kind="assignment" x="450" y="144">Qeue2 = 0</label>
+		</transition>
+		<transition id="id142">
+			<source ref="id134"/>
+			<target ref="id138"/>
+			<label kind="synchronisation" x="442" y="-153">movingout!</label>
+			<label kind="assignment" x="467" y="-127">Qeue1 = 0,
+Qeue1 = 0</label>
+			<nail x="408" y="-178"/>
+		</transition>
+		<transition id="id143">
+			<source ref="id136"/>
+			<target ref="id138"/>
+			<label kind="synchronisation" x="442" y="-272">movingout!</label>
+			<label kind="assignment" x="391" y="-297">Qeue4 = 0</label>
+		</transition>
+		<transition id="id144">
+			<source ref="id132"/>
+			<target ref="id128"/>
+		</transition>
+		<transition id="id145">
+			<source ref="id135"/>
+			<target ref="id128"/>
+		</transition>
+		<transition id="id146">
+			<source ref="id137"/>
+			<target ref="id128"/>
+		</transition>
+		<transition id="id147">
+			<source ref="id131"/>
+			<target ref="id132"/>
+			<label kind="synchronisation" x="212" y="170">wait?</label>
+		</transition>
+		<transition id="id148">
+			<source ref="id130"/>
+			<target ref="id135"/>
+			<label kind="synchronisation" x="263" y="-51">wait?</label>
+		</transition>
+		<transition id="id149">
+			<source ref="id130"/>
+			<target ref="id134"/>
+			<label kind="synchronisation" x="263" y="-136">approved?</label>
+		</transition>
+		<transition id="id150">
+			<source ref="id129"/>
+			<target ref="id137"/>
+			<label kind="synchronisation" x="204" y="-306">wait?</label>
+		</transition>
+		<transition id="id151">
+			<source ref="id129"/>
+			<target ref="id136"/>
+			<label kind="synchronisation" x="161" y="-391">approved?</label>
+		</transition>
+		<transition id="id152">
+			<source ref="id128"/>
+			<target ref="id131"/>
+			<label kind="synchronisation" x="-68" y="51">request!</label>
+			<label kind="assignment" x="-109" y="72">Qeue2 = 1</label>
+		</transition>
+		<transition id="id153">
+			<source ref="id128"/>
+			<target ref="id130"/>
+			<label kind="synchronisation" x="17" y="-85">request!</label>
+			<label kind="assignment" x="8" y="-68">Qeue1 = 1,
+Qeue2 = 1</label>
+		</transition>
+		<transition id="id154">
+			<source ref="id128"/>
+			<target ref="id129"/>
+			<label kind="synchronisation" x="-25" y="-204">request!</label>
+			<label kind="assignment" x="-51" y="-178">Qeue4 = 1</label>
+		</transition>
+		<transition id="id155">
+			<source ref="id127"/>
+			<target ref="id128"/>
+			<label kind="synchronisation" x="-348" y="-93">ArrivingfromEast!</label>
 		</transition>
 	</template>
 	<system>
 
-Car1 = Car ();
-Car2 = Car ();
-Car3 = Car ();
-Car4 = Car ();
-
-system Coordinator, Car1, Car2, Car3, Car4;
-</system>
+system Intersection_coordinator, Car1, Car2, Car3, Car4;</system>
 	<queries>
 		<query>
-			<formula/>
+			<formula>A[] not deadlock</formula>
 			<comment/>
+			<option key="--diagnostic" value="0"/>
+			<result outcome="success" type="quality" timestamp="2024-06-15 13:43:16 +0200">
+				<option key="--diagnostic" value="0"/>
+			</result>
 		</query>
 	</queries>
 </nta>

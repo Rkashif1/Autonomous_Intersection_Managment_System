@@ -1,0 +1,59 @@
+# Reading C:/intelFPGA/18.1/modelsim_ase/tcl/vsim/pref.tcl
+# Loading project Intersection_Control
+# reading C:/intelFPGA/18.1/modelsim_ase/win32aloem/../modelsim.ini
+# Loading project Intersection Managment
+# reading C:/intelFPGA/18.1/modelsim_ase/win32aloem/../modelsim.ini
+# Loading project Intersection_Control
+# Compile of Car.vhd failed with 1 errors.
+# Compile of Car.vhd failed with 1 errors.
+# Compile of Test_Bench.vhd failed with 1 errors.
+# Compile of Car.vhd failed with 1 errors.
+# Compile of Test_Bench.vhd failed with 1 errors.
+vsim -gui work.tb_intersection_control
+# vsim -gui work.tb_intersection_control 
+# Start time: 16:55:17 on Jun 30,2024
+# Loading std.standard
+# ** Error: (vsim-3173) Entity 'C:/intelFPGA/18.1/work.tb_intersection_control' has no architecture.
+# Error loading design
+# End time: 16:55:17 on Jun 30,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vsim -gui work.tb_intersection_control
+# vsim -gui work.tb_intersection_control 
+# Start time: 17:00:09 on Jun 30,2024
+# Loading std.standard
+# ** Error: (vsim-3173) Entity 'C:/intelFPGA/18.1/work.tb_intersection_control' has no architecture.
+# Error loading design
+# End time: 17:00:09 on Jun 30,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vsim -gui work.tb_intersection_control
+# vsim -gui work.tb_intersection_control 
+# Start time: 17:01:50 on Jun 30,2024
+# Loading std.standard
+# ** Error: (vsim-3173) Entity 'C:/intelFPGA/18.1/work.tb_intersection_control' has no architecture.
+# Error loading design
+# End time: 17:01:50 on Jun 30,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# Compile of Car.vhd failed with 1 errors.
+# Compile of Test_Bench.vhd failed with 1 errors.
+vsim -gui work.test_bench
+# vsim -gui work.test_bench 
+# Start time: 17:17:24 on Jun 30,2024
+# Loading std.standard
+# ** Error: (vsim-3173) Entity 'C:/intelFPGA/18.1/work.test_bench' has no architecture.
+# Error loading design
+# End time: 17:17:24 on Jun 30,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# Compile of Test_Bench.vhd failed with 1 errors.
+# Compile of Car.vhd failed with 1 errors.
+# Compile of Car.vhd was successful.
+# Compile of Test_Bench.vhd failed with 3 errors.
+# Compile of Test_Bench.vhd failed with 3 errors.
+# Compile of Test_Bench.vhd was successful.
+vsim -gui work.car
+# vsim -gui work.car 
+# Start time: 17:33:26 on Jun 30,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.car(behavioral)
